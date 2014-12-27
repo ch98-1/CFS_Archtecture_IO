@@ -28,7 +28,7 @@ Registers: Set to reset value at start.
 Instruction set. (<number>, <assembly>, <description>)
 
 0, set1, Sets r1 to value in r2.
-1, set2, Sets r2 to value in memory pointed by r3.
+1, set2, Sets r2 to value in memory pointed by r3, and move value that was in r2 to r3.
 2, set3, Sets r3 to value in r2.
 3, set4, Sets r4 to value in r2.
 4, set5, Sets r5 to value in r2.

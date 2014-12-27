@@ -14,11 +14,13 @@ void run(){//starts infinate loop until last byte in memory are more then 1 or r
 			break;
 		case 1:
 			r1.i += 1;//increment next instruction pointer by 1
+			unsigned long int r2cpy = r2.i;//get copy of r2
 			if (r4.i + r3.i >= r5.i){//if memory is out of bounds
 				r7.i = 1;//set out of bounds error
 				break;
 			}
 			memcpy(r2.b, mem + r4.i + r3.i, r6.i);//copy value pointed by r3 to r2
+			r3.i = r2cpy;//move old copy of r2 to r3
 			break;
 		case 2:
 			r1.i += 1;//increment next instruction pointer by 1
