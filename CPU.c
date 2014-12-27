@@ -9,7 +9,6 @@ void run(){//starts infinate loop until last byte in memory are more then 1 or r
 	while (1){//infinate loop
 		switch (mem[r4.i + r1.i]){//for new adress
 		case 0:
-			r1.i += 1;//increment next instruction pointer by 1
 			r1.i = r2.i;//set r1 to r2
 			break;
 		case 1:
