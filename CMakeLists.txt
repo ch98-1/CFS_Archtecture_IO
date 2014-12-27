@@ -1,4 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
-project (CPU_8)
+project (CFS_CPU)
 include_directories(${PROJECT_SOURCE_DIR})
-add_library(CPU_8 CPU.c)
+add_library(CFS_CPU CPU.c)
+add_executable(CFS_CLI main.c)
+target_link_libraries(CFS_CLI CFS_CPU)
