@@ -18,7 +18,7 @@ void run(){//starts infinate loop until last byte in memory are more then 1 or r
 				r7.i = 1;//set out of bounds error
 				break;
 			}
-			memcpy(r2.b, mem + r4.i + r3.i, r6.i);//copy value pointed by r3 to r2
+			memmove(r2.b, mem + r4.i + r3.i, r6.i);//copy value pointed by r3 to r2
 			r3.i = r2cpy;//move old copy of r2 to r3
 			break;
 		case 2:
@@ -47,7 +47,7 @@ void run(){//starts infinate loop until last byte in memory are more then 1 or r
 				r7.i = 1;//set out of bounds error
 				break;
 			}
-			memcpy(mem + r4.i + r3.i, r2.b,  r6.i);//copy value in r2 to memory pointed by r3
+			memmove(mem + r4.i + r3.i, r2.b,  r6.i);//copy value in r2 to memory pointed by r3
 			break;
 		case 8:
 			r1.i += 1;//increment next instruction pointer by 1
@@ -116,7 +116,7 @@ void run(){//starts infinate loop until last byte in memory are more then 1 or r
 				r7.i = 1;//set out of bounds error
 				break;
 			}
-			memcpy(r3.b, mem + r4.i + r1.i - r6.i, r6.i);//copy value after instruction to r3
+			memmove(r3.b, mem + r4.i + r1.i - r6.i, r6.i);//copy value after instruction to r3
 			break;
 		case 23:
 			r1.i += 1;//increment next instruction pointer by 1
