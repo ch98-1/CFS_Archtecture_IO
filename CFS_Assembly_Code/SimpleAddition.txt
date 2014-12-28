@@ -1,0 +1,11 @@
+cpy 28 //copy 28 to r3, move that to r2, copy 14 to r3 And Add 2 together
+get3 //Any word that is Not the 32 command is treated like comment
+cpy 14
+add
+cpy 65520 //copy return adress to r3
+get2 //put number in r3
+//everything from here is code to end execution
+cpy 4294967295 //all bits fill up last 4 bits of memory
+get3 
+cpy 65531
+get2

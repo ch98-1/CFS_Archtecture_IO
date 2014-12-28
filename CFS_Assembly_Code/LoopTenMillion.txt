@@ -1,0 +1,22 @@
+cpy 0 //Set Starting Memory To Zero
+get3
+cpy 65520
+set2
+//Start Of Loop
+cpy 65520
+set2
+inc
+cpy 65520
+get2
+cpy 65520
+set2
+cpy 10000000 //Ten Million Loops
+cmp
+get3 
+cpy 12 //12 Is Start Of Loop
+if
+//End Execution
+cpy 4294967295
+get3
+cpy 65531
+get2

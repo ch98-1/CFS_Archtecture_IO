@@ -1,0 +1,51 @@
+cpy 72 //Code for little endian
+get3
+cpy 240 //Write in adress 240 to 250
+get2 //write
+//repeat for each letter Writes over last letter's three byte of 0 at end
+cpy 101 //e
+get3
+cpy 241
+get2 
+cpy 108 //l
+get3
+cpy 242
+get2 
+cpy 108 //l
+get3
+cpy 243
+get2 
+cpy 111 //o
+get3
+cpy 244
+get2 
+cpy 32 //space
+get3
+cpy 245
+get2 
+cpy 87 //W
+get3
+cpy 246
+get2 
+cpy 111 //o
+get3
+cpy 247
+get2 
+cpy 114 //r
+get3
+cpy 248
+get2 
+cpy 108 //l
+get3
+cpy 249
+get2 
+cpy 100 //d
+get3
+cpy 250
+get2 
+//Finished writing "Hello World" in ascii
+//ending execution
+cpy 4294967295 //write in last byte
+get3
+cpy 65531
+get2
