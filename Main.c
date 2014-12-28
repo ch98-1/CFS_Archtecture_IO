@@ -5,6 +5,14 @@
 
 
 int main(int argc, char *argv[]){
+	unsigned int x = 1;//set x as 1 in this memory for endianness checking
+	if ((unsigned int)(((char *)&x)[0])){//if this was one
+		printf("This machene will run in Little-Endian\n");//it is Little-Endian
+	}
+	else{///if it was not It is Big-Endian
+		printf("This machene will run in Big-Endian\n");//it is Big-Endian
+	}
+	
 	if (argc == 2){
 		FILE *fp = fopen(argv[1], "rb");//open file at first argument as binary file for reading
 		if (fp == NULL){//if file could not be opend
