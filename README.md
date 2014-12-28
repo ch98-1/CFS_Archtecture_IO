@@ -51,7 +51,7 @@ hex, assembly, description
 0x13, mod,  Divide r2 by r3 and put remainder in r2.  
 0x14, inc, Increment r2 by 1. If overflow occurs, r2 will be all the lower bits in the result.  
 0x15, dec, Decrement r2 by 1. If overflow occurs, r2 will be all the lower bits in the result.  
-0x16, cpy <value>, Copy value after instruction to r3.  
+0x16, cpy (value), Copy value after instruction to r3.  
 0x17, cmp, Compare r2 and r3 and put 1 in larger value and 0 in smaller. Both becomes 0 if it were equal.  
 0x18, if, If r2 is true(1 or bigger), set r1 to r3. If not, do nothing (r1 increments by instruction length like usual).  
 0x19, and, do bitwise and on r2 and r3 then return result in r2.  
