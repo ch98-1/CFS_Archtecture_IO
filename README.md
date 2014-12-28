@@ -13,7 +13,7 @@ Next 2 registers are 2 values for arethmatics used in calculation.
 Registers 4 and 5 is used to set a bound to accessible memory. Registers 6 is the size in bytes that will be read or written from memory.  
 Register 7 will have last error code from reset. Risister 8 is number of operation from reset.  
 There is no port io so imput and output will all be done by memory mapped io.  
-Endianness depends on specifications.
+Endianness depends on implementation.
 
 Registers: Set to reset value at start.  
 1: Points to memory of next instruction. Increments every time it is used so it points to next instruction before this instruction executes.  

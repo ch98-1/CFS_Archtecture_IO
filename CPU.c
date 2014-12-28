@@ -2,7 +2,7 @@
 #include "Memory.h"
 
 
-
+//became Little-endian in x86-64 system running windows 8.1
 void run(){//starts infinate loop until last byte in memory are more then 1 or r1 + r4 reaches the maximum memory readable.
 	union registers r1, r2, r3, r4, r5, r6, r7, r8;//declare all registers
 	r1.i = 0, r2.i = 0, r3.i = 0, r4.i = 0, r5.i = memsize - 1, r6.i = word, r7.i = 0, r8.i = 0;//initialise all 8 registers to there starting values

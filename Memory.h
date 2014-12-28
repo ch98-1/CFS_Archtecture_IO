@@ -1,4 +1,6 @@
 //Copyright (C) 2014-2015  Corwin Hansen
+#ifndef MEMORY_H//include protection
+	#define MEMORY_H
 
 //Memory for the cpu to use
 #include <string.h> //for simpler memory handling
@@ -14,3 +16,5 @@ union registers{//register union
 };
 
 void run();//run program
+
+#endif
