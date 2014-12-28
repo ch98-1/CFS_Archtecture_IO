@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[]){
 	if (argc == 2){
-		FILE *fp = fopen(argv[1], "r");//open file at first argument
+		FILE *fp = fopen(argv[1], "rb");//open file at first argument as binary file for reading
 		if (fp == NULL){//if file could not be opend
 			printf("could not open file %s\n", argv[1]);//warn user that file could not be opened
 			exit(EXIT_FAILURE);//end of program
@@ -16,18 +16,18 @@ int main(int argc, char *argv[]){
 		printf("Read file in to memory\n Starting cpu...\n");//notify user that it is done reading from file
 		run();//run cpu
 		printf("cpu ended\n Starting to write to file...\n");//notify user that it is done running cpu and are now going to write to file
-		fp = fopen(argv[1], "w");
+		fp = fopen(argv[1], "wb");//open file for writing in binary
 		fwrite(mem, 1, memsize, fp);//write end result memory to file
 		printf("finished writing to file\n");//notify user that it has finished writing to file
 		exit(EXIT_SUCCESS);//end of program
 	}
 	else if(argc == 3){//compile assembly for Whatever Endianness that c compiler works with, with 4 byte long characters
-		FILE *fp = fopen(argv[1], "r");//open file at first argument for reading (assembly file)
+		FILE *fp = fopen(argv[1], "r");//open file at first argument for reading as text file(assembly file)
 		if (fp == NULL){//if file could not be opend
 			printf("could not open file %s\n", argv[1]);//warn user that file could not be opened
 			exit(EXIT_FAILURE);//end of program
 		}
-		FILE *rf = fopen(argv[2], "wb");//open file at second argument for writing (result)
+		FILE *rf = fopen(argv[2], "wb");//open file at second argument for writing as binary file(result)
 		unsigned char buffer[2048];//2048 byte long buffer
 		while (fscanf(fp, "%s", buffer) != EOF) {//keep reading until end of file is reached
 			if (strcmp(buffer, "set1") == 0){//instruction in assembly
