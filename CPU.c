@@ -68,6 +68,7 @@ void run(){//starts infinate loop until last byte in memory are more then 1 or r
 		case 12:
 			r1.i += 1;//increment next instruction pointer by 1
 			r2.i = r7.i;//set r2 to r7
+			r7.i = 0;//set r7 to 0
 			break;
 		case 13:
 			r1.i += 1;//increment next instruction pointer by 1
