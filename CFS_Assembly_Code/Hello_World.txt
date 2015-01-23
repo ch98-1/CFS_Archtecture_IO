@@ -45,7 +45,8 @@ cpy 250
 get2 
 //Finished writing "Hello World" in ascii
 //ending execution
-cpy 4294967295 //write in last byte
+//End Execution
+cpy 4294967295
 get3
-cpy 65531
+cpy 52428796
 get2

@@ -10,7 +10,6 @@ int main(int argc, char *argv[]){
 	printf("Could not allocate 50MB of memory");//warning
 	exit(EXIT_FAILURE);
 #endif
-
 	unsigned int x = 1;//set x as 1 in this memory for endianness checking
 	if ((unsigned int)(((char *)&x)[0])){//if this was one
 		printf("This machene will run in Little-Endian\n");//it is Little-Endian
@@ -30,8 +29,8 @@ int main(int argc, char *argv[]){
 		printf("Read file in to memory\n Starting cpu...\n");//notify user that it is done reading from file
 		//run things
 		SDL_Init(SDL_INIT_VIDEO);//start SDL
-
-		window = SDL_CreateWindow(//create window named CFS_Archtecture that is 320 by 240
+		SDL_Window* window;
+			window = SDL_CreateWindow(//create window named CFS_Archtecture that is 320 by 240
 			"CFS_Archtecture",                  // window title
 			SDL_WINDOWPOS_UNDEFINED,           // initial x position
 			SDL_WINDOWPOS_UNDEFINED,           // initial y position
@@ -39,10 +38,8 @@ int main(int argc, char *argv[]){
 			240,                               // height, in pixels
 			0				                  // no special flags
 			);
+			SDL_Thread *thread = SDL_CreateThread(run, "CFS_CPU", (void *)NULL); //thread for running cpu
 
-
-
-		run();//run cpu
 		while (1){//screen mouce, and keybord update for memory mapped io
 			//Memory mapped IO
 			//0 - 52198299:general memory.

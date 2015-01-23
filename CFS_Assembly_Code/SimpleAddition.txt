@@ -6,6 +6,6 @@ cpy 65520 //copy return adress to r3
 get2 //put number in r3
 //everything from here is code to end execution
 cpy 4294967295 //all bits fill up last 4 bits of memory
-get3 
-cpy 65531
+get3
+cpy 52428796
 get2

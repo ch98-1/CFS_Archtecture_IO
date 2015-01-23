@@ -18,5 +18,5 @@ if
 //End Execution
 cpy 4294967295
 get3
-cpy 65531
+cpy 52428796
 get2

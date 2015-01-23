@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
-project (CFS_CPU_IO)
+project (CFS_CLI_IO)
 include_directories(${PROJECT_SOURCE_DIR})
-add_library(CFS_CPU_IO CPU.c)
+add_library(CFS_CPU CPU.c)
 add_executable(CFS_CLI_IO Main.c)
 
 #Lookup and add sdl2 for input and output
