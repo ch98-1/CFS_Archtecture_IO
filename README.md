@@ -26,7 +26,7 @@ Registers: Set to reset value at start.
 8: Number of operations from start or last time reset. Can only be read. Reset only by reset operation.  
   
   
-Instruction set. 
+Instruction set: 
 
 hex, assembly, description  
 0x00, set1, Sets r1 to value in r2.  
@@ -68,3 +68,13 @@ Error code list:
 1: Memory out of bound. Trying to access memory greater then r5.  
 2: Arithmatic overflow, or too big of a value to hold in r2.  
 3: Unidentified instruction  
+
+Memory Mapped IO: 
+Max word size is 4 byte.  
+Memory is 50 megabyte or 52428800 byte.  
+(memory represented in int)  
+0 - 52198299:general memory. 
+52121500 - 52428699 : screen memory for 320 * 240 rgba color screen. Overwrites last screen.  
+52428700 - 52428703: last character in keybord input in ascii. Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.  
+52428704 - 52428711: x and y of mouce.
+52428799 :End CPU if not 0.  

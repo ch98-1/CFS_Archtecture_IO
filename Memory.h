@@ -6,9 +6,11 @@
 #include <string.h> //for simpler memory handling
 
 #define word 4 //maximum size of one word (4 byte or 36 bit by default)
-#define memsize 65535 //size of memory (2^16 - 1 byte by default)
+#define memsize 52428800 //size of memory (2^20*50 bytes/50 megabyte including special adress by default)
 
 unsigned char mem[memsize];//Memory
+
+
 
 union registers{//register union
 	unsigned long int i;//integer

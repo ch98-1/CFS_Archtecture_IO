@@ -2,9 +2,15 @@
 #include <stdio.h>//input and output
 #include <stdlib.h>//standard stuff
 #include "Memory.h"//Memory
+#include "SDL.h"//SDL
 
 
 int main(int argc, char *argv[]){
+#if SIZE_MAX < 52428800 //if memory maximum is less then 50 MB 
+	printf("Could not allocate 50MB of memory");//warning
+	exit(EXIT_FAILURE);
+#endif
+
 	unsigned int x = 1;//set x as 1 in this memory for endianness checking
 	if ((unsigned int)(((char *)&x)[0])){//if this was one
 		printf("This machene will run in Little-Endian\n");//it is Little-Endian
@@ -22,7 +28,39 @@ int main(int argc, char *argv[]){
 		memset(mem, 0, memsize);//clear memory
 		fread(mem, 1, memsize, fp);//read starting memory from file
 		printf("Read file in to memory\n Starting cpu...\n");//notify user that it is done reading from file
+		//run things
+		SDL_Init(SDL_INIT_VIDEO);//start SDL
+
+		window = SDL_CreateWindow(//create window named CFS_Archtecture that is 320 by 240
+			"CFS_Archtecture",                  // window title
+			SDL_WINDOWPOS_UNDEFINED,           // initial x position
+			SDL_WINDOWPOS_UNDEFINED,           // initial y position
+			320,                               // width, in pixels
+			240,                               // height, in pixels
+			0				                  // no special flags
+			);
+
+
+
 		run();//run cpu
+		while (1){//screen mouce, and keybord update for memory mapped io
+			//Memory mapped IO
+			//0 - 52198299:general memory.
+			//52121500 - 52428699 : screen memory for 320 * 240 rgba color screen.Overwrites last screen.
+			//52428700 - 52428703 : last character in keybord input in ascii.Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.
+			//52428704 - 52428711 : x and y of mouce.
+			//52428799 : End CPU if not 0.
+
+
+
+			if (mem[memsize - 1]) break;//written in last byte of memory
+		}
+
+
+
+
+		SDL_Quit();//end of running SDL
+		//end of run
 		printf("cpu ended\n Starting to write to file...\n");//notify user that it is done running cpu and are now going to write to file
 		fp = fopen(argv[1], "wb");//open file for writing in binary
 		fwrite(mem, 1, memsize, fp);//write end result memory to file
