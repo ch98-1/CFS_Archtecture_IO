@@ -29,8 +29,7 @@ int main(int argc, char *argv[]){
 		printf("Read file in to memory\n Starting cpu...\n");//notify user that it is done reading from file
 		//run things
 		SDL_Init(SDL_INIT_VIDEO);//start SDL
-		SDL_Window* window;
-			window = SDL_CreateWindow(//create window named CFS_Archtecture that is 320 by 240
+		SDL_Window* window = SDL_CreateWindow(//create window named CFS_Archtecture that is 320 by 240
 			"CFS_Archtecture",                  // window title
 			SDL_WINDOWPOS_UNDEFINED,           // initial x position
 			SDL_WINDOWPOS_UNDEFINED,           // initial y position
@@ -40,6 +39,8 @@ int main(int argc, char *argv[]){
 			);
 			SDL_Thread *thread = SDL_CreateThread(run, "CFS_CPU", (void *)NULL); //thread for running cpu
 
+			SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED); //create Renderer
+
 		while (1){//screen mouce, and keybord update for memory mapped io
 			//Memory mapped IO
 			//0 - 52198299:general memory.
@@ -47,15 +48,18 @@ int main(int argc, char *argv[]){
 			//52428700 - 52428703 : last character in keybord input in ascii.Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.
 			//52428704 - 52428711 : x and y of mouce.
 			//52428799 : End CPU if not 0.
-
-
-
+			unsigned long int i;//screen pixel counter
+			for (i = 52121500; i < 52428700; i += 4){
+				unsigned long int x = ((i - 52121500) / 4) % 320;//get x position
+				unsigned long int y = ((i - 52121500) / 4) / 320;//get y position
+				SDL_SetRenderDrawColor(renderer, mem[i], mem[i + 1], mem[i + 2], mem[i + 3]);//set drawing color for that pixel
+				SDL_RenderDrawPoint(renderer, x, y);//draw point
+			}
+			SDL_RenderPresent(renderer);//render screen
 			if (mem[memsize - 1]) break;//written in last byte of memory
 		}
-
-
-
-
+		SDL_DestroyRenderer(renderer);//destroy renderer
+		SDL_DestroyWindow(window);//destro window
 		SDL_Quit();//end of running SDL
 		//end of run
 		printf("cpu ended\n Starting to write to file...\n");//notify user that it is done running cpu and are now going to write to file
