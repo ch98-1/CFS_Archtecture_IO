@@ -28,7 +28,10 @@ int main(int argc, char *argv[]){
 		fread(mem, 1, memsize, fp);//read starting memory from file
 		printf("Read file in to memory\n Starting cpu...\n");//notify user that it is done reading from file
 		//run things
-		SDL_Init(SDL_INIT_VIDEO);//start SDL
+		if (SDL_Init(SDL_INIT_VIDEO) != 0){//start SDL and get any error if it dosen't.
+			printf("Could not load SDL: %s", SDL_GetError());//print out error
+		}
+
 		SDL_Window* window = SDL_CreateWindow(//create window named CFS_Archtecture that is 320 by 240
 			"CFS_Archtecture",                  // window title
 			SDL_WINDOWPOS_UNDEFINED,           // initial x position
@@ -45,7 +48,7 @@ int main(int argc, char *argv[]){
 			//Memory mapped IO
 			//0 - 52198299:general memory.
 			//52121500 - 52428699 : screen memory for 320 * 240 rgba color screen.Overwrites last screen.
-			//52428700 - 52428703 : last character in keybord input in ascii.Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.
+			//52428700 - 52428703 : last character in keybord input in ascii/unicode.Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.
 			//52428704 - 52428711 : x and y of mouce.
 			//52428799 : End CPU if not 0.
 			unsigned long int i;//screen pixel counter
@@ -58,6 +61,7 @@ int main(int argc, char *argv[]){
 			SDL_RenderPresent(renderer);//render screen
 			if (mem[memsize - 1]) break;//written in last byte of memory
 		}
+
 		SDL_DestroyRenderer(renderer);//destroy renderer
 		SDL_DestroyWindow(window);//destro window
 		SDL_Quit();//end of running SDL
