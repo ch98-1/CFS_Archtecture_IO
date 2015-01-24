@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 		while (1){//screen mouce, and keybord update for memory mapped io
 			//Memory mapped IO
 			//0 - 52198299:general memory.
-			//52121500 - 52428699 : screen memory for 320 * 240 rgba color screen.Overwrites last screen.
+			//52121500 - 52428699 : screen memory for 320 * 240 rgba color screen. Overwrites last screen. Color is written in abgr order with 1 byte each.
 			//52428700 - 52428703 : last character in keybord input in ascii/unicode.Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.
 			//52428704 - 52428711 : x and y of mouce.
 			//52428799 : End CPU if not 0.
