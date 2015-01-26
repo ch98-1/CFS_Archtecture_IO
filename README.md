@@ -13,7 +13,7 @@ Next 2 registers are 2 values for arethmatics used in calculation.
 Registers 4 and 5 is used to set a bound to accessible memory. Registers 6 is the size in bytes that will be read or written from memory.  
 Register 7 will have last error code from reset. Risister 8 is number of operation from reset.  
 There is no port io so imput and output will all be done by memory mapped io.  
-Endianness depends on implementation.
+Endianness depends on implementation, and this only does signed math.
 
 Registers: Set to reset value at start.  
 1: Points to memory of next instruction. Increments every time it is used so it points to next instruction before this instruction executes.  
@@ -76,7 +76,6 @@ Memory is 50 megabyte or 52428800 byte.
 0 - 52198299:general memory. 
 52121500 - 52428699 : screen memory for 320 * 240 rgba color screen. Overwrites last screen.  Color is written in abgr order with 1 byte each.  
 52428700 - 52428703: last character in keybord input in ascii/unicode. Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.  
-52428704 - 52428711: x and y of mouse movement.
-52428712 - 52428719: x and y of mouse wheel movement.
-52428720 - 52428727: right and reft of mouse button.
+52428704 - 52428711: x and y of mouse position.  
+52428712 - 52428719: right and left of mouse button. Reset to 0 after reading.  
 52428799 :End CPU if not 0.  

@@ -44,15 +44,52 @@ int main(int argc, char *argv[]){
 
 			SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED); //create Renderer
 
+			SDL_Event event; //event handling for input devices
+
 		while (1){//screen mouce, and keybord update for memory mapped io
 			//Memory mapped IO
 			//0 - 52198299:general memory.
 			//52121500 - 52428699 : screen memory for 320 * 240 rgba color screen. Overwrites last screen. Color is written in abgr order with 1 byte each.
-			//52428700 - 52428703 : last character in keybord input in ascii/unicode.Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.
-			//52428704 - 52428711: x and y of mouse movement.
-			//52428712 - 52428719: x and y of mouse wheel movement.
-			//52428720 - 52428727 : right and reft of mouse button.
+			//52428700 - 52428703 : last character in keybord input in ascii/unicode. Reset to 0 after reading. 3 more bits at end for ease in 32 bit mode.
+			//52428704 - 52428711: x and y of mouse position.
+			//52428712 - 52428719: right and left of mouse button. Reset to 0 after reading.
 			//52428799 : End CPU if not 0.
+			while (SDL_PollEvent(&event)){//event handling
+				union registers ch;//character
+				union registers x, y;//mouse position
+				union registers c;//mouse clicks
+				switch (event.type) {
+				case SDL_QUIT:
+					SDL_DestroyRenderer(renderer);//destroy renderer
+					SDL_DestroyWindow(window);//destro window
+					SDL_Quit();//end of running SDL
+					exit(EXIT_SUCCESS);//end of program
+					break;
+				case SDL_MOUSEMOTION:
+					x.i = (uint32_t)event.motion.x;//get x and y position of mouse
+					y.i = (uint32_t)event.motion.y;
+					memmove(mem + 52428704, x.b, word);//set current mouse position
+					memmove(mem + 52428708, x.b, word);
+					break;
+				case SDL_MOUSEBUTTONDOWN:
+					c.i = event.button.clicks;
+					if (event.button.button = SDL_BUTTON_RIGHT){
+						memmove(mem + 52428704, c.b, word);//set right button
+					}
+					if (event.button.button = SDL_BUTTON_LEFT){
+						memmove(mem + 52428708, c.b, word);//set left button
+					}
+					break;
+				case SDL_KEYDOWN:
+					ch.i = event.key.keysym.sym;//get key
+					memmove(mem + 52428700, ch.b, word);//set key
+					break;
+				default://do nothing for other events
+					break;
+				}
+			}
+
+			//screen update
 			unsigned long int i;//screen pixel counter
 			for (i = 52121500; i < 52428700; i += 4){
 				unsigned long int x = ((i - 52121500) / 4) % 320;//get x position
